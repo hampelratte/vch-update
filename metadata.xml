@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iPOJO>
+	<instance component="de.berlios.vch.update.Activator" name="vch.web.update" />
+	<instance component="de.berlios.vch.update.UpdateServlet" name="vch.web.update.servlet" />
+	<instance component="de.berlios.vch.update.UpdateConfigServlet" name="vch.web.update.servlet.config" />
+</iPOJO>

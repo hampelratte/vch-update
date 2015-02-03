@@ -1,0 +1,11 @@
+.stopped {
+    color:lightgrey;
+}
+
+.update_available {
+    background-color:#ffd8b2;
+}
+
+#container {
+    margin-top:30px; margin-bottom:30px
+}

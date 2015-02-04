@@ -12,7 +12,7 @@
   </td><td>
     <input class="ui-widget ui-widget-content ui-corner-all" type="text" name="obr" style="min-width:600px; max-width:600px" />
   </td><td>
-    <input class="ui-button" type="submit" name="add_obr" value="${I18N_ADD}" />
+    <input class="ui-button" type="submit" name="add_obr" value="${I18N_ADD_OBR}" />
   </td>
 </tr>
 <tr>

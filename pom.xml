@@ -3,7 +3,7 @@
     <artifactId>update</artifactId>
     <name>VCH Update Manager</name>
     <packaging>bundle</packaging>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.8</version>
     <description>Manage and update VCH extensions</description>
 
     <parent>

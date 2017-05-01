@@ -64,10 +64,12 @@ public class UpdateServlet extends VchHttpServlet implements ObrManager {
 
     static final int MENU_POS = Integer.MAX_VALUE - 200;
 
+
     private List<Resource> availableBundles = new Vector<Resource>();
 
     private List<BundleRepresentation> installedBundles = new Vector<BundleRepresentation>();
 
+    private final String VCH_OBR = "https://hampelratte.org/maven/releases/repository.xml";
     private final String FELIX_OBR = "http://felix.apache.org/obr/releases.xml";
 
     private List<String> ignoreList = Arrays.asList(new String[] { "de.berlios.vch.slf4j-logger", "de.berlios.vch.bundle-loader" });
@@ -223,7 +225,7 @@ public class UpdateServlet extends VchHttpServlet implements ObrManager {
     }
 
     private void updateUpdateManager(HttpServletRequest req, HttpServletResponse resp, Resource resource) throws MalformedURLException,
-            ServiceUnavailableException, Exception {
+    ServiceUnavailableException, Exception {
         boolean isFelixObrConfigured = false;
         if (getOBRs().contains(FELIX_OBR)) {
             isFelixObrConfigured = true;
@@ -437,7 +439,7 @@ public class UpdateServlet extends VchHttpServlet implements ObrManager {
 
     /**
      * Filters all old version, so that only the newest versions of a plugin are in the returned collection
-     * 
+     *
      * @param res
      * @return
      */
@@ -573,12 +575,21 @@ public class UpdateServlet extends VchHttpServlet implements ObrManager {
         }
         Collections.sort(obrUris);
         if (obrUris.isEmpty()) {
-            addOBR("https://hampelratte.org/maven/releases/repository.xml");
-            addOBR(FELIX_OBR);
-            obrUris.add("https://hampelratte.org/maven/releases/repository.xml");
-            obrUris.add(FELIX_OBR);
+            addDefaultObrs(obrUris);
         }
         return obrUris;
+    }
+
+    private void addDefaultObrs(List<String> obrUris) {
+        String[] obrs = new String[] {FELIX_OBR, VCH_OBR};
+        for (String obr : obrs) {
+            try {
+                addOBR(obr);
+                obrUris.add(obr);
+            } catch (Exception e) {
+                logger.log(LogService.LOG_ERROR, "Couldn't add VCH extension repository at " + obr, e);
+            }
+        }
     }
 
     @Override
